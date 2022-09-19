@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest.welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::middleware('auth')->get('/home', 'HomeController@index')->name('home');
+
+//Proteggo tutte le rotte con il middleware: devo essere autenticato altrimenti non accedo al Link ma mi viene restituita la pagina di login
+Route::middleware('auth')
+    //# aggiorna la cartella all'interno della quale si trovano i controller
+    ->namespace('Admin')
+    // § aggiorna il name di ogni "subroute" con un prefisso admin.
+    ->name('admin.')
+    // aggiorna ogni url con un prefisso admin/
+    ->prefix('admin')
+    //ragqruppa varie rotte
+    ->group(function (){
+            Route::get('/', 'HomeController@index')->name('home');
+});
+
+// Route::middleware('auth')->resource('/comics', 'ComicsController');
