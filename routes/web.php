@@ -33,6 +33,7 @@ Route::middleware('auth')
     //ragqruppa varie rotte
     ->group(function (){
             Route::get('/', 'HomeController@index')->name('home');
+            Route::resource('/posts', 'PostsController');
 });
 
-// Route::middleware('auth')->resource('/comics', 'ComicsController');
+// Route::middleware('auth')->resource('/posts', 'PostsController');
