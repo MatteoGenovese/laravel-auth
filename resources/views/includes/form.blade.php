@@ -11,10 +11,6 @@
     <input type="date" class="form-control" id="post_date"  placeholder="Enter the post date" name="post_date">
 </div>
 <div class="form-group">
-    <label for="post_image">post image</label>
-    <input type="text" class="form-control" id="post_image"  placeholder="Enter the post image" name="post_image">
-</div>
-<div class="form-group">
     <label for="post_content">post content</label>
     <input type="text" class="form-control" id="post_content"  placeholder="Enter the post content" name="post_content">
 </div>
