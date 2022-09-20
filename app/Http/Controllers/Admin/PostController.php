@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+use Faker\Generator as Faker;
+
 class PostController extends Controller
 {
     /**
@@ -15,6 +17,8 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
         //
@@ -38,11 +42,14 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Faker $faker)
     {
-        $dataSent = $request->all();
-        dd($dataSent);
+        $sentData = $request->all();
+        $post = new Post();
+        $sentData['post_image'] = $faker->imageUrl();
+        $post->create($sentData);
 
+        return redirect()->route('admin.posts.index',compact('post'));
 
 
     }
