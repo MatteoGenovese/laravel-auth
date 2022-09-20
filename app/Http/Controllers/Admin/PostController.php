@@ -29,7 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -40,7 +40,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataSent = $request->all();
+        dd($dataSent);
+
+
+
     }
 
     /**
@@ -51,7 +55,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
