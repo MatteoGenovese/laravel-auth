@@ -33,7 +33,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $post = new Post();
+        return view('admin.posts.create', compact('post'));
     }
 
     /**
@@ -48,10 +49,7 @@ class PostController extends Controller
         $post = new Post();
         $sentData['post_image'] = $faker->imageUrl();
         $post->create($sentData);
-
         return redirect()->route('admin.posts.index',compact('post'));
-
-
     }
 
     /**
@@ -74,7 +72,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -84,9 +83,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, Faker $faker)
     {
-        //
+        $sentData = $request->all();
+        $post = Post::findOrFail($id);
+        $sentData['post_image'] = $faker->imageUrl();
+        $post->update($sentData);
+        return redirect()->route('admin.posts.index',compact('post'));
     }
 
     /**
@@ -97,6 +100,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::where('id',$id)->first();
+        Post::destroy($post->id);
+        return redirect()->route('admin.posts.index');
     }
 }
