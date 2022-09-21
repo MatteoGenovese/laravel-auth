@@ -29,14 +29,13 @@
                                     Edit
                                 </a>
 
-                                <form action="">
+                                <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" value="delete">
                                         destroy
-
                                     </button>
-                            </form>
+                                </form>
 
                             </td>
                         </tr>
@@ -45,7 +44,7 @@
                     @endforelse
 
                 </tbody>
-              </table>
+            </table>
 
 
         </div>
