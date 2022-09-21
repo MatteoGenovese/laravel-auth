@@ -20,7 +20,7 @@ class PostsTableSeeder extends Seeder
             $newPost = new Post();
             $newPost->title = $faker->realText(35);
             $newPost->author = $faker->userName();
-            $newPost->post_date = $faker->dateTimeThisYear();
+            $newPost->post_date = $faker->date('Y-m-d');
             $newPost->post_image = $faker->imageUrl();
             $newPost->post_content = $faker->paragraphs(5, true);
             $newPost->save();
